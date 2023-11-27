@@ -4,7 +4,9 @@ TODO: Give a short introduction of your project. Let this section explain the ob
 # Getting Started
 1.	Installation process
 2.	Software dependencies
-- 
+- Google Guava (used sometimes)
+- JGraphT (used mostly for graph related problems)
+- JUnit (some days have unit tests others don't)
 3.	Latest releases
 4.	API references
 
