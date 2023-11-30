@@ -23,7 +23,7 @@ public class FileUtil {
             List<String> subList = new ArrayList<>();
 
             while ((line = reader.readLine()) != null) {
-                if ("".equals(line)) {
+                if (line.isEmpty()) {
                     groupedLists.add(subList);
                     subList = new ArrayList<>();
                 } else {

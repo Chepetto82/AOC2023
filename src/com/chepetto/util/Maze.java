@@ -55,7 +55,7 @@ public class Maze {
     }
 
     private void addEdge(int x1, int y1, int x2, int y2) {
-        LOGGER.entering(getClass().getName(), "addEdge");
+        LOGGER.entering(CLASS_NAME, "addEdge");
         if (test(x1, y1, x2, y2)) {
             LOGGER.finer(() -> String.format("Edge from [%d,%d] to [%d,%d] is within bounds", x1, y1, x2, y2));
             MazePair<Point, Character> source = new MazePair<>(new Point(x1, y1), grid[y1][x1]);
@@ -76,11 +76,11 @@ public class Maze {
         } else {
             LOGGER.finer(() -> String.format("Edge from [%d,%d] to [%d,%d] is out of bounds", x1, y1, x2, y2));
         }
-        LOGGER.exiting(getClass().getName(), "addEdge");
+        LOGGER.exiting(CLASS_NAME, "addEdge");
     }
 
     private void setupGrid(List<String> lines) {
-        LOGGER.entering(getClass().getName(), "setupGrid");
+        LOGGER.entering(CLASS_NAME, "setupGrid");
         grid = new char[lines.size()][lines.get(0).length()];
         for (int y = 0; y < lines.size(); y++) {
             char[] line = lines.get(y).toCharArray();
@@ -91,7 +91,7 @@ public class Maze {
                 grid[y][x] = mapper.apply(line[x]);
             }
         }
-        LOGGER.exiting(getClass().getName(), "setupGrid");
+        LOGGER.exiting(CLASS_NAME, "setupGrid");
     }
 
     public void parse(List<String> lines) {
@@ -110,7 +110,7 @@ public class Maze {
     }
 
     public void parse(List<String> lines, boolean includeDiagonals) {
-        LOGGER.entering(getClass().getName(), "parse");
+        LOGGER.entering(CLASS_NAME, "parse");
         setupGrid(lines);
         for (int row = 0; row < grid.length; row++) {
             for (int col = 0; col < grid[row].length; col++) {
@@ -126,6 +126,6 @@ public class Maze {
                 }
             }
         }
-        LOGGER.exiting(getClass().getName(), "parse");
+        LOGGER.exiting(CLASS_NAME, "parse");
     }
 }

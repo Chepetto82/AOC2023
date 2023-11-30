@@ -8,10 +8,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class HashUtils {
-    private static final int[] KNOT_HASH_NUMBERS_RANGE = IntStream.rangeClosed(0, 255).toArray();
-    public static final int[] KNOT_HASH_APPEND_SEQUENCE = IntStream.of(17, 31, 73, 47, 23).toArray();
-    public static final int KNOT_HASH_RUNS = 64;
-
+    protected static final int[] KNOT_HASH_APPEND_SEQUENCE = new int[]{17, 31, 73, 47, 23};
+    private static final int KNOT_HASH_RUNS = 64;
     static java.security.MessageDigest MD5Instance;
 
     static {
@@ -35,7 +33,9 @@ public class HashUtils {
                 Arrays.stream(input.codePoints().toArray()),
                 Arrays.stream(KNOT_HASH_APPEND_SEQUENCE)).toArray();
 
-        int length = KNOT_HASH_NUMBERS_RANGE.length;
+        int[] knotHashNumbersRange = IntStream.rangeClosed(0, 255).toArray();
+
+        int length = knotHashNumbersRange.length;
 
         int position = 0;
         int skipSize = 0;
@@ -48,24 +48,24 @@ public class HashUtils {
                 int reversePos = subListLength - 1;
                 if (position + subListLength < length) {
                     for (int j = position; j < position + subListLength; j++) {
-                        tmpArray[reversePos--] = KNOT_HASH_NUMBERS_RANGE[j];
+                        tmpArray[reversePos--] = knotHashNumbersRange[j];
                     }
-                    System.arraycopy(tmpArray, 0, KNOT_HASH_NUMBERS_RANGE, position, tmpArray.length);
+                    System.arraycopy(tmpArray, 0, knotHashNumbersRange, position, tmpArray.length);
                 } else {
                     for (int j = position; j < position + subListLength; j++) {
-                        tmpArray[reversePos--] = KNOT_HASH_NUMBERS_RANGE[j % length];
+                        tmpArray[reversePos--] = knotHashNumbersRange[j % length];
                     }
 
                     int counter = 0;
                     for (int j = position; j < position + subListLength; j++) {
-                        KNOT_HASH_NUMBERS_RANGE[j % length] = tmpArray[counter++];
+                        knotHashNumbersRange[j % length] = tmpArray[counter++];
                     }
                 }
 
                 position = (position + subListLength + skipSize++) % length;
             }
         }
-        return KNOT_HASH_NUMBERS_RANGE;
+        return knotHashNumbersRange;
     }
 
     public static int[] knotHash(String input) {
