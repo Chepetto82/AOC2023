@@ -1,23 +1,10 @@
 package com.chepetto.util;
 
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class AlgoUtils {
-
-    static java.security.MessageDigest MD5Instance;
-
-    static {
-        try {
-            MD5Instance = java.security.MessageDigest.getInstance("MD5");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static List<Integer> getDivisorsFor(int n) {
         List<Integer> v = new ArrayList<>();
@@ -181,19 +168,5 @@ public class AlgoUtils {
             }
             System.out.println();
         }
-    }
-
-    public static String md5(String input) {
-        /*HashFunction md5 = Hashing.md5();
-        HashCode hc = md5.newHasher()
-                .putString(input, Charsets.UTF_8)
-                .hash();
-
-        return hc.toString();*/
-
-
-        byte[] array = MD5Instance.digest(input.getBytes());
-        MD5Instance.update(StandardCharsets.UTF_8.encode(input));
-        return String.format("%032x", new BigInteger(1, MD5Instance.digest()));
     }
 }

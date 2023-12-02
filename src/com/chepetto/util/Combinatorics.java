@@ -20,8 +20,8 @@ public class Combinatorics {
         return processLargerSubsets(result, set, subset, 0, 0);
     }
 
-    public static <T> List<List<T>> processLargerSubsets(List<List<T>> result, List<T> set, List<T> subset, int subsetSize,
-                                                         int nextIndex) {
+    private static <T> List<List<T>> processLargerSubsets(List<List<T>> result, List<T> set, List<T> subset, int subsetSize,
+                                                          int nextIndex) {
         if (subsetSize == subset.size()) {
             result.add(ImmutableList.copyOf(subset));
         } else {

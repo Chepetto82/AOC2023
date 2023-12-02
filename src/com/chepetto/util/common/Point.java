@@ -29,10 +29,8 @@ public class Point {
 
         Point point = (Point) o;
 
-        if (x != point.x) return false;
-        return y == point.y;
+        return x == point.x && y == point.y;
     }
-
 
     @Override
     public int hashCode() {
