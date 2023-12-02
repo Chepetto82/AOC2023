@@ -25,20 +25,13 @@ public class App extends Solution {
     public Object part1() {
         return lines.stream()
                 .map(l -> l.replaceAll("[a-zA-Z]", ""))
-                .map(l -> {
-                    if (l.length() < 2) {
-                        return l + l;
-                    } else {
-                        return l;
-                    }
-                })
+                .map(l -> l.length() < 2 ? l + l : l)
                 .filter(l -> !l.isEmpty())
                 .map(l -> l.charAt(0) + l.substring(l.length() - 1))
                 .mapToInt(Integer::parseInt)
                 .sum();
     }
 
-    // 58014 too high
     @Override
     public Object part2() {
         return lines.stream()
