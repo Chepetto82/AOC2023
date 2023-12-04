@@ -2,7 +2,6 @@ package com.chepetto.day2;
 
 import com.chepetto.util.Solution;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
