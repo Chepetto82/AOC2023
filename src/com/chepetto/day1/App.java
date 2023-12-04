@@ -2,11 +2,13 @@ package com.chepetto.day1;
 
 import com.chepetto.util.Solution;
 
-import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class App extends Solution {
+
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("(?=(" + String.join("|", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine") + "|\\d))");
+
     public App() {
         this(false);
     }
@@ -73,23 +75,20 @@ public class App extends Solution {
                             return sb.toString();
                         }
                 )*/
-                .map(l -> {
-                    final Pattern p = Pattern.compile("(?=(" + String.join("|", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine") + "|\\d))");
-                    return p.matcher(l).results().map(r -> switch (r.group(1)) {
-                                case "one" -> "1";
-                                case "two" -> "2";
-                                case "three" -> "3";
-                                case "four" -> "4";
-                                case "five" -> "5";
-                                case "six" -> "6";
-                                case "seven" -> "7";
-                                case "eight" -> "8";
-                                case "nine" -> "9";
+                .map(l -> NUMBER_PATTERN.matcher(l).results().map(r -> switch (r.group(1)) {
+                            case "one" -> "1";
+                            case "two" -> "2";
+                            case "three" -> "3";
+                            case "four" -> "4";
+                            case "five" -> "5";
+                            case "six" -> "6";
+                            case "seven" -> "7";
+                            case "eight" -> "8";
+                            case "nine" -> "9";
 
-                                default -> r.group(1);
-                            }
-                    ).collect(Collectors.joining());
-                })
+                            default -> r.group(1);
+                        }
+                ).collect(Collectors.joining()))
                 .map(l -> l.length() < 2 ? l + l : l)
                 .peek(l -> System.out.print(" -> " + l))
                 .filter(l -> !l.isEmpty())
